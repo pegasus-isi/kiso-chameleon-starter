@@ -1,3 +1,5 @@
+The Kiso repository is a template that can be used to start a new Kiso experiment project. The repository defines the directory structure, best practices, etc. to be used while developing an experiment in Kiso.
+
 # Getting Started
 
 ## Prerequisites

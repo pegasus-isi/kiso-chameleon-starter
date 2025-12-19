@@ -1,52 +1,44 @@
 name: my-first-experiment
-condor:
-  central-manager:
-    roles:
-      - central-manager
-    # Optionally, define a custom Condor configuration file
-    # config-file: config/cm-condor_config
 
-  # Optionally, define on or more execute nodes configurations
-  execute:
-    roles:
+deployment:
+  htcondor:
+    - kind: central-manager
+      labels:
+        - central-manager
+      # Optionally, define a custom Condor configuration file
+      # config-file: config/cm-condor_config
+
+    # Optionally, define on or more execute nodes configurations
+    - kind: execute
+      labels:
+        - execute
+      # Optionally, define a custom Condor configuration file
+      # config-file: config/exec-condor_config
+
+    # Optionally, define on or more execute nodes configurations
+    - kind: submit
+      labels:
+        - submit
+      # Optionally, define a custom Condor configuration file
+      # config-file: config/submit-condor_config
+
+    # Optionally, define on or more personal HTCondor nodes configurations
+    # - kind: personal
+    #   labels:
+    #     - edge-1
+    #   Optionally, define a custom Condor configuration file
+    #   config-file: config/personal-condor_config
+
+software:
+  # Optionally, identify nodes on which Docker will run
+  docker:
+    labels:
       - execute
-    # Optionally, define a custom Condor configuration file
-    # config-file: config/exec-condor_config
-  # execute-1:
-  #   roles:
-  #     - execute-large-memory
-    # Optionally, define a custom Condor configuration file
-    # config-file: config/exec-condor_config
 
-  # Optionally, define on or more execute nodes configurations
-  submit:
-    roles:
+  # Optionally, identify nodes on which Apptainer will run
+  apptainer:
+    labels:
       - submit
-    # Optionally, define a custom Condor configuration file
-    # config-file: config/submitc-ondor_config
-  # submit-1:
-  #   roles:
-  #     - submit-large-memory
-
-  # Optionally, define on or more personal HTCondor nodes configurations
-  # personal:
-  #   roles:
-  #     - edge-1
-  # personal-1:
-  #   roles:
-  #     - edge-2
-  #   Optionally, define a custom Condor configuration file
-  #   config-file: config/personal-condor_config
-
-# Optionally, identify nodes on which Docker will run
-docker:
-  roles:
-    - execute
-
-# Optionally, identify nodes on which Apptainer will run
-apptainer:
-  roles:
-    - submit
 
 sites:
   # Example, provisions three virtual machines using Vagrant with VirtualBox on the local machine.
@@ -57,21 +49,21 @@ sites:
     config_extra: 'config.vm.synced_folder ".", "/vagrant", disabled: true'
     resources:
       machines:
-        - roles:
+        - labels:
             - execute
           backend: virtualbox
           box: bento/rockylinux-9
           user: vagrant
           flavour: "large"
           number: 1
-        - roles:
+        - labels:
             - submit
           backend: virtualbox
           box: bento/rockylinux-9
           user: vagrant
           flavour: "large"
           number: 1
-        - roles:
+        - labels:
             - central-manager
           backend: virtualbox
           box: bento/rockylinux-9
@@ -79,7 +71,7 @@ sites:
           flavour: "large"
           number: 1
       networks:
-        - roles:
+        - labels:
             - r1
           cidr: "172.16.42.0/16"
 
@@ -90,7 +82,7 @@ sites:
   #   rc_file: secrets/chi-edge-app-credopenrc.sh
   #   resources:
   #     machines:
-  #       - roles:
+  #       - labels:
   #           - central-manager
   #         machine_name: raspberrypi4-64
   #         count: 1
@@ -107,7 +99,7 @@ sites:
   #   image: CC-Ubuntu18.04
   #   resources:
   #     machines:
-  #       - roles:
+  #       - labels:
   #           - submit
   #         flavour: compute_zen3
   #         number: 1
@@ -123,12 +115,12 @@ experiments:
     # Script to run the Pegasus workflow
     main: bin/main.sh
     # The node from which the workflow will be submitted
-    submit-node-roles:
+    submit_node_labels:
       - submit
 
     # Optionally, specify what scripts to run and on which node to run them on to setup the environment
     # setup:
-    #   - roles:
+    #   - labels:
     #       - submit
     #     executable: /bin/bash
     #     script: |
@@ -138,14 +130,14 @@ experiments:
     # Optionally, specify input files and on which node to copy them on to setup the environment
     # By default, the directory containing the experiment.yml file will be copied to all provisioned nodes
     # inputs:
-    #   - roles:
+    #   - labels:
     #       - execute
     #     src: README.md
     #     dst: ~kiso/kiso-process-experiment
 
     # Optionally, specify what scripts to run and on which node to run them on after the environment
-    # post-scripts:
-    #   - roles:
+    # post_scripts:
+    #   - labels:
     #       - submit
     #     executable: /bin/bash
     #     script: |
@@ -155,7 +147,7 @@ experiments:
     # Optionally, specify output files and on which node to copy them from after the experiment
     # By default, the Pegasus workflow submit directory will be copied to the local machine
     # outputs:
-    #   - roles:
+    #   - labels:
     #       - submit
     #     src: ~kiso/kiso-process-experiment
     #     dst: local-machine

@@ -6,28 +6,28 @@ deployment:
       labels:
         - central-manager
       # Optionally, define a custom Condor configuration file
-      # config-file: config/cm-condor_config
+      # config_file: config/cm-condor_config
 
     # Optionally, define on or more execute nodes configurations
     - kind: execute
       labels:
         - execute
       # Optionally, define a custom Condor configuration file
-      # config-file: config/exec-condor_config
+      # config_file: config/exec-condor_config
 
     # Optionally, define on or more execute nodes configurations
     - kind: submit
       labels:
         - submit
       # Optionally, define a custom Condor configuration file
-      # config-file: config/submit-condor_config
+      # config_file: config/submit-condor_config
 
     # Optionally, define on or more personal HTCondor nodes configurations
     # - kind: personal
     #   labels:
     #     - edge-1
     #   Optionally, define a custom Condor configuration file
-    #   config-file: config/personal-condor_config
+    #   config_file: config/personal-condor_config
 
 software:
   # Optionally, identify nodes on which Docker will run

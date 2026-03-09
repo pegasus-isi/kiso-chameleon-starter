@@ -1,5 +1,8 @@
+# For the complete experiment configuration schema
+# See: https://kiso.readthedocs.io/en/latest/experiment-configuration-schema.html
 name: my-first-experiment
 
+# See: https://kiso.readthedocs.io/en/latest/concepts.html#deployment
 deployment:
   htcondor:
     - kind: central-manager
@@ -25,10 +28,11 @@ deployment:
     # Optionally, define on or more personal HTCondor nodes configurations
     # - kind: personal
     #   labels:
-    #     - edge-1
+    #     - execute
     #   Optionally, define a custom Condor configuration file
     #   config_file: config/personal-condor_config
 
+# See: https://kiso.readthedocs.io/en/latest/concepts.html#software
 software:
   # Optionally, identify nodes on which Docker will run
   docker:
@@ -40,6 +44,17 @@ software:
     labels:
       - submit
 
+  # Optionally, identify nodes on which Ollama will run
+  # ollama:
+  #   - labels:
+  #       - submit
+  #     models:
+  #       - gpt-oss:20b
+  #     environment:
+  #       OLLAMA_MAX_QUEUE: 512
+
+
+# See: https://kiso.readthedocs.io/en/latest/concepts.html#sites
 sites:
   # Example, provisions three virtual machines using Vagrant with VirtualBox on the local machine.
   - kind: vagrant
@@ -142,6 +157,15 @@ experiments:
   - kind: shell
     name: shell-experiment
     description: An experiment to print a message
+
+    # Optionally, specify input files and on which node to copy them on to setup the environment
+    # By default, the directory containing the experiment.yml file will be copied to all provisioned nodes
+    # inputs:
+    #   - labels:
+    #       - execute
+    #     src: README.md
+    #     dst: ~kiso/kiso-experiment-template
+
     # Specify what scripts to run and on which node to run them on
     scripts:
       - labels:
@@ -149,6 +173,7 @@ experiments:
         script: |
           #!/bin/bash
           echo "Hello, world!" | tee hello.txt
+
     # Optionally, specify output files and on which node to copy them from after the experiment
     outputs:
       - labels:
@@ -181,7 +206,7 @@ experiments:
     #   - labels:
     #       - execute
     #     src: README.md
-    #     dst: ~kiso/kiso-process-experiment
+    #     dst: ~kiso/kiso-experiment-template
 
     # Optionally, specify what scripts to run and on which node to run them on after the environment
     # post_scripts:
@@ -197,5 +222,5 @@ experiments:
     # outputs:
     #   - labels:
     #       - submit
-    #     src: ~kiso/kiso-process-experiment
+    #     src: ~kiso/kiso-experiment-template
     #     dst: local-machine

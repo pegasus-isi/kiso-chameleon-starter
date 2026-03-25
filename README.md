@@ -4,9 +4,11 @@ The Kiso repository is a template that can be used to start a new Kiso experimen
 
 ## Prerequisites
 
-```sh
-pip install kiso[chameleon]
-```
+1. A Chameleon account at [chameleoncloud.org](https://chameleoncloud.org)
+2. [An active Chameleon project allocation](https://chameleoncloud.readthedocs.io/en/latest/user/project.html#creating-a-project) — create a new project or join an existing one
+3. [An OpenRC credentials file](https://chameleoncloud.readthedocs.io/en/latest/technical/cli/authentication.html#creating-an-application-credential) — create an application credential and download the OpenRC v3 file from the Chameleon dashboard under **Identity → Application Credentials**
+4. [An SSH keypair registered in your Chameleon project](https://chameleoncloud.readthedocs.io/en/latest/technical/gui/navigation.html#key-pairs) — used as the `key_name` field in the config
+5. Kiso installed: `pip install kiso[chameleon]`
 
 ## Defining the experiment
 

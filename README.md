@@ -1,13 +1,10 @@
-The Kiso repository is a template that can be used to start a new Kiso experiment project. The repository defines the directory structure, best practices, etc. to be used while developing an experiment in Kiso.
+The Kiso repository is a template that can be used to start a new Kiso experiment running on Chameleon. The repository defines the directory structure, best practices, etc. to be used while developing an experiment in Kiso.
 
 # Getting Started
 
 ## Prerequisites
 
 ```sh
-pip install kiso
-# Install the resource provider specific dependencies you want to use
-pip install kiso[vagrant]
 pip install kiso[chameleon]
 ```
 
@@ -35,9 +32,6 @@ kiso run
 
 # Destroy the provisioned resources
 kiso down
-
-# Pegasus workflow submit directories will be placed in the output directory at the end of the experiment. The submit directories will also have a statistics directory with the pegasus-statistics output.
-# Outputs defined in the experiment configuration will be placed to the destination specified in the experiment configuration.
 ```
 
 # Versioning
@@ -61,8 +55,6 @@ git push --tags
 - [Pegasus Workflow Management System](https://pegasus.isi.edu)
 - [EnOSlib](https://discovery.gitlabpages.inria.fr/enoslib/)
 - [Chameleon Cloud](https://www.chameleoncloud.org)
-- [FABRIC](https://portal.fabric-testbed.net)
-- [Vagrant](https://developer.hashicorp.com/vagrant)
 
 # Acknowledgements
 

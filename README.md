@@ -22,16 +22,16 @@ Place any required data files in the `data` directory.
 
 ```sh
 # Check Kiso experiment configuration
-kiso check
+kiso check experiment-shell.yml
 
 # Provision and setup the resources
-kiso up
+kiso up experiment-shell.yml
 
 # Run the experiments defined in the experiment configuration YAML file
-kiso run
+kiso run experiment-shell.yml
 
 # Destroy the provisioned resources
-kiso down
+kiso down experiment-shell.yml
 ```
 
 # Versioning

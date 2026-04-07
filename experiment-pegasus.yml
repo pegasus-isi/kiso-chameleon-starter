@@ -73,8 +73,8 @@ sites:
   # Example, provisions a virtual machine on Chameleon TACC.
   - kind: chameleon
     walltime: "04:00:00"
-    lease_name: tacc-lease
-    rc_file: secrets/chi-tacc-app-cred-openrc.sh
+    lease_name: tacc-lease-pegasus
+    rc_file: secrets/tacc-app-cred-oac-edge-openrc.sh
     key_name: mayani-mac-mini
     image: CC-Ubuntu18.04
     resources:
